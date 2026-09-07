@@ -14,6 +14,7 @@ def sieve_of_eratosthenes(n):
 # Calculate primes up to 1000
 limit = 1000
 prime_numbers = sieve_of_eratosthenes(limit)
+alpha = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']  # Placeholder for alpha values
 
 # Connect to MySQL database
 db = mysql.connector.connect(
@@ -26,8 +27,8 @@ db = mysql.connector.connect(
 cursor = db.cursor()
 
 # Insert primes using executemany for bulk insertion
-query = "INSERT IGNORE INTO primes (prime_number) VALUES (%s)"
-data = [(p,) for p in prime_numbers]
+query = "INSERT IGNORE INTO primes (prime_number, alpha) VALUES (%s, %s)"
+data = [(p, a) for p, a in zip(prime_numbers, alpha)]
 
 cursor.executemany(query, data)
 db.commit()

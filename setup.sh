@@ -38,7 +38,7 @@ else
 
 # Create database to store stock prices
     sudo mysql -u root -p -e 'CREATE DATABASE IF NOT EXISTS primes_db;'
-    sudo mysql -u root -p -D primes_db -e 'CREATE TABLE IF NOT EXISTS primes (id INT AUTO_INCREMENT PRIMARY KEY, prime_number INT NOT NULL);'
+    sudo mysql -u root -p -D primes_db -e 'CREATE TABLE IF NOT EXISTS primes (id INT AUTO_INCREMENT PRIMARY KEY, prime_number INT NOT NULL, alpha VARCHAR(255) UNIQUE);'
 
 #mysql commands to void the password requirement of new databases
     DB_USER="root"
