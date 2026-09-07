@@ -37,7 +37,8 @@ else
     sudo chmod 777 /var/run/mysqld/mysqld.sock
 
 # Create database to store stock prices
-    sudo mysql -u root -p -e 'CREATE DATABASE primes_db;'
+    sudo mysql -u root -p -e 'CREATE DATABASE IF NOT EXISTS primes_db;'
+    sudo mysql -u root -p -D primes_db -e 'CREATE TABLE IF NOT EXISTS primes (id INT AUTO_INCREMENT PRIMARY KEY, prime_number INT NOT NULL);'
 
 #mysql commands to void the password requirement of new databases
     DB_USER="root"
@@ -88,6 +89,12 @@ EOF
     #sudo mysql -u root < /workspaces/$(basename $PWD)/database/stock_prices_db.sql
     #mysql -u [username] -p [database_name] < [path_to_dump_file.sql]
     sudo mysql -u root -p primes_db < /workspaces/$(basename $PWD)/database/primes_db.sql
+
+#execute python script to fill database
+    python prime_calc.py
+
+#save database to local file
+    sudo mysqldump -u root -p primes_db > /workspaces/$(basename $PWD)/database/primes_db.sql
 
 #execute python script to search database
     python search_db.py

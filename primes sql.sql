@@ -1,4 +1,4 @@
-CREATE DATABASE prime_db;
+CREATE DATABASE primes_db;
 USE prime_db;
 
 CREATE TABLE primes (

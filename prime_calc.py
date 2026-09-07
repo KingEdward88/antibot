@@ -18,9 +18,9 @@ prime_numbers = sieve_of_eratosthenes(limit)
 # Connect to MySQL database
 db = mysql.connector.connect(
     host="localhost",
-    user="your_username",
-    password="your_password",
-    database="prime_db"
+    user="root",
+    password="password",
+    database="primes_db"
 )
 
 cursor = db.cursor()
