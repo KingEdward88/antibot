@@ -19,6 +19,8 @@ else
     #pip install yfinance #installs the web scraper yfinance for yahoo finance
     pip install pandas  #data manipulation and analysis package for python
     pip install pymysql #include mysql database
+    pip install python-dotenv   #environment helpers
+
 
     #install and start a flavor of MYSQL db named mariadb
     sudo apt update
@@ -38,7 +40,7 @@ else
 
 # Create database to store stock prices
     sudo mysql -u root -p -e 'CREATE DATABASE IF NOT EXISTS primes_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'
-    sudo mysql -u root -p -D primes_db -e 'CREATE TABLE IF NOT EXISTS primes (id INT AUTO_INCREMENT PRIMARY KEY, prime_number INT NOT NULL, alpha VARCHAR(255) UNIQUE);'
+    #sudo mysql -u root -p -D primes_db -e 'CREATE TABLE IF NOT EXISTS primes (id INT AUTO_INCREMENT PRIMARY KEY, prime_number INT NOT NULL, alpha VARCHAR(255) UNIQUE);'
 
 #mysql commands to void the password requirement of new databases
     DB_USER="root"
@@ -91,7 +93,7 @@ EOF
     sudo mysql -u root -p primes_db < /workspaces/$(basename $PWD)/database/primes_db.sql
 
 #execute python script to fill database
-    python prime_calc.py
+    python prime_code_db_populate.py
 
 #save database to local file
     sudo mysqldump -u root -p primes_db > /workspaces/$(basename $PWD)/database/primes_db.sql
