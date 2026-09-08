@@ -1,8 +1,11 @@
 import math
 
-word = 'james edward'
-word_parse = list(word)
-word_parse_num = [ord(char)-96 for char in word_parse]
+sentence = 'james douglas edward'
+word_split = sentence.split()
+word_parse = list(word_split)
+
+word_parse_num = [[ord(char) - 96 for char in word] for word in word_parse]
+
 print(word_parse_num)
 
 def circular_shift(arr, k, direction="right"):
@@ -30,9 +33,10 @@ alt_alpha = circular_shift(alpha, 2, "right")
 print(alpha[25])
 print(alt_alpha[25])
 
-alt_word_parse_num = [alt_alpha.index(i) for i in word]
-alt_word_parse = [alt_alpha.index(i) + 97 for i in word]
+alt_word_parse_num = [[alt_alpha.index(i) for i in word] for word in word_parse]
+alt_word_parse = [[alt_alpha.index(i) + 97 for i in word] for word in word_parse]
 print(alt_word_parse)
 
-alt_word_parse = "".join([chr(num) for num in alt_word_parse])
-print(alt_word_parse)
+alt_word = "".join(["".join([chr(num) for num in word]) + "\n" for word in alt_word_parse])
+
+print(alt_word)
