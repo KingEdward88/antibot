@@ -1,10 +1,11 @@
 import math
+from support.ascii import ascii
 
 sentence = 'james douglas edward'
 word_split = sentence.split()
 word_parse = list(word_split)
 
-word_parse_num = [[ord(char) - 96 for char in word] for word in word_parse]
+word_parse_num = [[ord(char) for char in word] for word in word_parse]
 
 print(word_parse_num)
 
@@ -24,17 +25,19 @@ def circular_shift(arr, k, direction="right"):
 
 # Example Usage:
 my_list = [1, 2, 3, 4, 5]
-alpha = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+#alpha = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+alpha = ascii()
 
-print(circular_shift(alpha, 2, "right"))  # Output: [4, 5, 1, 2, 3]
-print(circular_shift(alpha, 2, "left"))   # Output: [3, 4, 5, 1, 2]
 
-alt_alpha = circular_shift(alpha, 2, "right")
-print(alpha[25])
-print(alt_alpha[25])
+print(circular_shift(alpha, 100, "right"))  # Output: [4, 5, 1, 2, 3]
+print(circular_shift(alpha, 100, "left"))   # Output: [3, 4, 5, 1, 2]
+
+alt_alpha = circular_shift(alpha, 100, "right")
+print(alpha[255])
+print(alt_alpha[255])
 
 alt_word_parse_num = [[alt_alpha.index(i) for i in word] for word in word_parse]
-alt_word_parse = [[alt_alpha.index(i) + 97 for i in word] for word in word_parse]
+alt_word_parse = [[alt_alpha.index(i) for i in word] for word in word_parse]
 print(alt_word_parse)
 
 alt_word = "".join(["".join([chr(num) for num in word]) + "\n" for word in alt_word_parse])
